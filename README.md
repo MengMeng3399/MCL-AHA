@@ -10,3 +10,36 @@ Overall framework of the MCL-AHA model. MCL-AHA first constructs an invocation g
 ⭐ The HGA dataset refers to our previous work:[ https://github.com/528Lab/CAData](https://github.com/528Lab/CAData)⭐ 
 
 ⭐ The PWA dataset refers to: [https://github.com/kkfletch/API-Dataset](https://github.com/kkfletch/API-Dataset)⭐ 
+
+
+### Environment
+
+- **Python**: 3.9.16  
+- **PyTorch**: 2.0.1  
+- **Transformers**: 4.3x.x  
+- Common dependencies: `numpy`, `scipy`, `pandas`, `scikit-learn`, `tqdm`
+
+
+### BERT Embeddings
+We extract textual embeddings for Mashups/APIs using `bert_embedder.py` (HuggingFace `AutoTokenizer` / `AutoModel`).
+- Default model: `bert-base-uncased.` 
+- Tokenization: padding + truncation with `--max-length 128`.
+- Representation: `--layer last`.
+- Pooling: `--pooling mean` (masked mean pooling over non-padding tokens using the attention mask); `--exclude-special-tokens` is optional to exclude `[CLS]/[SEP]` from mean pooling.
+- BERT is used in inference mode (without fine-tuning) for embedding extraction.
+- Empty text: outputs a zero vector (`--on-empty zero`).
+- Outputs: `bert_mashup_des.json` and `bert_api_des.json` (key -> embedding list).
+
+Example:
+```bash
+python bert_embedder.py \
+  --mashup-json data/mashup.json \
+  --api-json data/api.json \
+  --model-name bert-base-uncased \
+  --layer last \
+  --pooling mean \
+  --max-length 128 \
+  --batch-size 64 \
+  --seed 42
+  --on-empty zero
+```
