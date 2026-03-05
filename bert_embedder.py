@@ -319,12 +319,12 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--input", type=str, default=None, help="Generic single input JSON path.")
     p.add_argument("--output", type=str, default=None, help="Generic single output JSON path.")
     p.add_argument("--key-field", type=str, default=None, help="Generic key field for --input (e.g., id/name).")
-    p.add_argument("--text-field", type=str, default=None, help="Generic text field for --input (e.g., category).")
+    p.add_argument("--text-field", type=str, default=None, help="Generic text field for --input (e.g., description).")
 
     # Field defaults for notebook-like datasets:
     p.add_argument("--mashup-key-field", type=str, default="id", help="Key field in mashup rows.")
     p.add_argument("--api-key-field", type=str, default="name", help="Key field in api rows.")
-    p.add_argument("--default-text-field", type=str, default="category", help="Text field name (default for both).")
+    p.add_argument("--default-text-field", type=str, default="description", help="Text field name (default for both).")
 
     # Model / encoding config
     p.add_argument("--model-name", type=str, default="bert-base-uncased",
