@@ -13,7 +13,7 @@ Overall framework of the MCL-AHA model. MCL-AHA first constructs an invocation g
 
 ## Training Configuration
 
-Key training hyperparameters used in our experiments are listed below.
+Key training hyperparameters used in our experiments are summarized below.
 
 ### Contrastive Learning
 - Temperature τ (cross-view contrastive loss): **0.6**
@@ -23,17 +23,18 @@ Key training hyperparameters used in our experiments are listed below.
 - Perturbation strength μe: **0.2**
 - Cutoff threshold μt: **0.8**
 
-### Training Settings
+### Optimization Settings
 - Optimizer: **Adam**
-- Learning rate: **1e-3 (PWA)** / **3e-4 (HGA)**
-- L2 regularization λ: **1e-5**
-- Learning rate scheduler: None (the learning rate is kept constant during training)
-- Max training epochs: **400**
-- Early stopping patience: **50**
+- Learning rate: **1e−3 (PWA)** / **3e−4 (HGA)**
+- L2 regularization λ: **1e−5**
 
-### Batch Size
-- Training batch size: **4096**
-- Testing batch size: **2048**
+### Training Settings
+- Batch size: **128**
+
+All hyperparameters are tuned on the validation set via grid search. The detailed hyperparameter search ranges and optimal values are reported in **Table 3 of the paper**.
+
+For additional implementation details, please refer to our open-source repository:  
+https://github.com/MengMeng3399/MCL-AHA
 
 
 
