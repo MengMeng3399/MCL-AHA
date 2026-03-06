@@ -12,13 +12,27 @@ Overall framework of the MCL-AHA model. MCL-AHA first constructs an invocation g
 ⭐ The PWA dataset refers to: [https://github.com/kkfletch/API-Dataset](https://github.com/kkfletch/API-Dataset)⭐ 
 
 
-### Environment
+## Training Configuration
 
-- **Python**: 3.9.16  
-- **PyTorch**: 2.0.1  
-- **Transformers**: 4.3x.x  
-- Common dependencies: `numpy`, `scipy`, `pandas`, `scikit-learn`, `tqdm`
+To improve reproducibility, we provide the main training hyperparameters used in our experiments.
 
+- **Optimizer:** Adam  
+- **Learning Rate:** Tuned from {1e−4, 3e−4, 1e−3, 3e−3}  
+  - PWA dataset: 1e−3  
+  - HGA dataset: 3e−4  
+- **Training Epochs:** 100  
+- **Early Stopping:** Not used (the model is trained for a fixed number of epochs)  
+- **Random Seed:** 2020  
+
+### Contrastive Learning Parameters
+- **Temperature τ:** 0.6 (used in Eq. 17–21)
+
+### Hypergraph Augmentation
+To construct different views for contrastive learning, we randomly mask hyperedge connections:
+
+- **Drop probability (μm, μi):** 0.2
+
+This stochastic masking mechanism is used to generate augmented hypergraph views during training.
 
 ## BERT Embeddings (Textual Features)
 
@@ -54,3 +68,6 @@ python bert_embedder.py \
   --batch-size 64 \
   --seed 42 \
   --on-empty zero
+
+
+
