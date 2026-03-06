@@ -27,7 +27,7 @@ Key training hyperparameters used in our experiments are listed below.
 - Optimizer: Adam
 - Learning rate: 1e-3 (PWA) / 3e-4 (HGA)
 - Learning rate scheduler: None (the learning rate is kept constant during training)
-- L2 regularization λ: 1e-5
+- L2 regularization λ: 1e-3 (PWA) /1e-5 (HGA)
 - Batch size: 128
 - Max training epochs: 400
 - Early stopping patience: 50
