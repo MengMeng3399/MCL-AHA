@@ -11,29 +11,31 @@ Overall framework of the MCL-AHA model. MCL-AHA first constructs an invocation g
 
 ⭐ The PWA dataset refers to: [https://github.com/kkfletch/API-Dataset](https://github.com/kkfletch/API-Dataset)⭐ 
 
+## Training Configuration
 
-## Training and Optimization Details
+Key training hyperparameters used in our experiments are listed below.
 
-To ensure full reproducibility, we provide the specific training configurations, hyperparameters, and optimization details utilized in our experiments.
+### Contrastive Learning
+- Temperature τ (cross-view contrastive loss): **0.6**
+- Temperature τ (masked hypergraph contrastive loss): **0.5**
 
-### Hyperparameters for Contrastive Learning and Augmentation
-- **Contrastive Temperature ($\tau$)**: 
-  - Cross-view contrastive loss temperature: `0.6`
-  - Hypergraph masked contrastive loss temperature: `0.5`
-- **Augmentation Parameters (Eq. 16)**: 
-  - Overall perturbation strength ($\mu_e$): `0.2`
-  - Scaling parameter / Cutoff threshold ($\mu_t$): `1.0`
-  - *(Note: Based on empirical tuning, combining these two parameters yields a robust structural masking probability bound of `0.2`, which ensures optimal performance while maintaining computational efficiency in our implementations).*
+### Augmentation Parameters (Eq. 16)
+- Perturbation strength μe: **0.2**
+- Cutoff threshold μt: **1.0**
 
-### Training Configurations & Early Stopping
-- **Max Epochs**: The model is trained for a maximum of `400` epochs.
-- **Early Stopping**: We employ an early stopping strategy to prevent overfitting. The training process is terminated if the primary evaluation metric (e.g., NDCG) on the validation set does not improve for `50` consecutive epochs. 
-- **Batch Size**: `4096` for training and `2048` for testing (configurable via `--batch_size` and `--test_batch_size`).
+### Training Settings
+- Optimizer: **Adam**
+- Learning rate: **1e-3 (PWA)** / **3e-4 (HGA)**
+- L2 regularization λ: **1e-5**
+- Max training epochs: **400**
+- Early stopping patience: **50**
 
-### Optimization Details
-- **Optimizer**: `Adam` (Adaptive Moment Estimation).
-- **Learning Rate Scheduler**: The learning rate is kept constant throughout the training process (i.e., no scheduler is applied). The optimal initial learning rates are tuned via grid search (e.g., `1e-3` for PWA and `3e-4` for HGA).
-- **L2 Regularization ($\lambda$)**: Applied to model embeddings to prevent overfitting, configured via the `--l2` argument (default is `1e-5`).
+### Batch Size
+- Training batch size: **4096**
+- Testing batch size: **2048**
+
+
+
 ## BERT Embeddings (Textual Features)
 
 We extract textual embeddings for Mashups/APIs using `bert_embedder.py` (HuggingFace `AutoTokenizer` / `AutoModel`).  
