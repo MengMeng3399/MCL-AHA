@@ -12,28 +12,28 @@ Overall framework of the MCL-AHA model. MCL-AHA first constructs an invocation g
 ⭐ The PWA dataset refers to: [https://github.com/kkfletch/API-Dataset](https://github.com/kkfletch/API-Dataset)⭐ 
 
 
-## Training Configuration
+## Training and Optimization Details
 
-To improve reproducibility, we provide the main training hyperparameters used in our experiments.
+To ensure full reproducibility, we provide the specific training configurations, hyperparameters, and optimization details utilized in our experiments.
 
-- **Optimizer:** Adam  
-- **Learning Rate:** Tuned from {1e−4, 3e−4, 1e−3, 3e−3}  
-  - PWA dataset: 1e−3  
-  - HGA dataset: 3e−4  
-- **Training Epochs:** 100  
-- **Early Stopping:** Not used (the model is trained for a fixed number of epochs)  
-- **Random Seed:** 2020  
+### Hyperparameters for Contrastive Learning and Augmentation
+- **Contrastive Temperature ($\tau$)**: 
+  - Cross-view contrastive loss temperature: `0.6`
+  - Hypergraph masked contrastive loss temperature: `0.5`
+- **Augmentation Parameters (Eq. 16)**: 
+  - Overall perturbation strength ($\mu_e$): `0.2`
+  - Scaling parameter / Cutoff threshold ($\mu_t$): `1.0`
+  - *(Note: Based on empirical tuning, combining these two parameters yields a robust structural masking probability bound of `0.2`, which ensures optimal performance while maintaining computational efficiency in our implementations).*
 
-### Contrastive Learning Parameters
-- **Temperature τ:** 0.6 (used in Eq. 17–21)
+### Training Configurations & Early Stopping
+- **Max Epochs**: The model is trained for a maximum of `400` epochs.
+- **Early Stopping**: We employ an early stopping strategy to prevent overfitting. The training process is terminated if the primary evaluation metric (e.g., NDCG) on the validation set does not improve for `50` consecutive epochs. 
+- **Batch Size**: `4096` for training and `2048` for testing (configurable via `--batch_size` and `--test_batch_size`).
 
-### Hypergraph Augmentation
-To construct different views for contrastive learning, we randomly mask hyperedge connections:
-
-- **Drop probability (μm, μi):** 0.2
-
-This stochastic masking mechanism is used to generate augmented hypergraph views during training.
-
+### Optimization Details
+- **Optimizer**: `Adam` (Adaptive Moment Estimation).
+- **Learning Rate Scheduler**: The learning rate is kept constant throughout the training process (i.e., no scheduler is applied). The optimal initial learning rates are tuned via grid search (e.g., `1e-3` for PWA and `3e-4` for HGA).
+- **L2 Regularization ($\lambda$)**: Applied to model embeddings to prevent overfitting, configured via the `--l2` argument (default is `1e-5`).
 ## BERT Embeddings (Textual Features)
 
 We extract textual embeddings for Mashups/APIs using `bert_embedder.py` (HuggingFace `AutoTokenizer` / `AutoModel`).  
