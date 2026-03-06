@@ -17,7 +17,7 @@ Key training hyperparameters used in our experiments are listed below.
 
 ### Contrastive Learning
 - Temperature τ (cross-view contrastive loss): 0.6
-- Temperature τ (masked hypergraph contrastive loss): 0.5
+- Temperature τ (hypergraph contrastive loss): 0.5
 
 ### Augmentation Parameters (Eq. 16)
 - Perturbation strength μe: 0.2
