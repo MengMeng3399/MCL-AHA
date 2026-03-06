@@ -21,7 +21,7 @@ Key training hyperparameters used in our experiments are listed below.
 
 ### Augmentation Parameters (Eq. 16)
 - Perturbation strength μe: **0.2**
-- Cutoff threshold μt: **1.0**
+- Cutoff threshold μt: **0.8**
 
 ### Training Settings
 - Optimizer: **Adam**
