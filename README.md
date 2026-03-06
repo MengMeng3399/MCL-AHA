@@ -31,9 +31,6 @@ Key training hyperparameters used in our experiments are listed below.
 - Batch size: 128
 - Max training epochs: 400
 - Early stopping patience: 50
-
-All hyperparameters are tuned on the validation set via grid search.  
-
 ## BERT Embeddings (Textual Features)
 
 We extract textual embeddings for Mashups/APIs using `bert_embedder.py` (HuggingFace `AutoTokenizer` / `AutoModel`).  
