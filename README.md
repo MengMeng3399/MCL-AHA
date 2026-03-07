@@ -1,11 +1,11 @@
-# MCL-AHA
-# Multi-level Contrastive Learning with Adaptive Hypergraph Augmentation for Cloud API Recommendation
+# AHCL
+# Adaptive Hypergraph Contrastive Learning for Cloud API Recommendation
 ⭐ This code has been completely released ⭐
 
-⭐ Overall framework of the MCL-AHA model⭐ 
+⭐ Overall framework of the AHCL model⭐ 
 <img width="5344" height="3113" alt="flowchart" src="https://github.com/user-attachments/assets/096a05fa-7e57-42f1-921c-69a90053bd18" />
 
-Overall framework of the MCL-AHA model. MCL-AHA first constructs an invocation graph, a Mashup hypergraph, and a cloud API hypergraph. Node representations are learned via GNN and HGNN. Subsequently, multi-level contrastive learning is performed, comprising hypergraph contrastive learning (HCL) and cross-view contrastive learning (CVCL).
+Overall framework of the AHCL model. AHCL first constructs an invocation graph, a Mashup hypergraph, and a cloud API hypergraph. Node representations are learned via GNN and HGNN. Subsequently, multi-level contrastive learning is performed, comprising hypergraph contrastive learning (HCL) and cross-view contrastive learning (CVCL).
 
 ⭐ The HGA dataset refers to our previous work:[ https://github.com/528Lab/CAData](https://github.com/528Lab/CAData)⭐ 
 
